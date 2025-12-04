@@ -19,6 +19,17 @@ public class MedecinService {
     public List<Medecin> getAllMedecins() { return medecinRepository.findAll(); }
     public Optional<Medecin> getMedecinById(Long id) { return medecinRepository.findById(id); }
     public Medecin saveMedecin(Medecin medecin) { return medecinRepository.save(medecin); }
+    
+    public Optional<Medecin> updateMedecin(Long id, Medecin medecinDetails) {
+        return medecinRepository.findById(id).map(medecin -> {
+            medecin.setNom(medecinDetails.getNom());
+            medecin.setSpecialite(medecinDetails.getSpecialite());
+            medecin.setEmail(medecinDetails.getEmail());
+            medecin.setPhone(medecinDetails.getPhone());
+            return medecinRepository.save(medecin);
+        });
+    }
+    
     public void deleteMedecin(Long id) { medecinRepository.deleteById(id); }
 }
 

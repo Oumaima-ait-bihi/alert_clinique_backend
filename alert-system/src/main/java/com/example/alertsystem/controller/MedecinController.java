@@ -29,6 +29,13 @@ public class MedecinController {
     @PostMapping
     public Medecin createMedecin(@RequestBody Medecin medecin) { return medecinService.saveMedecin(medecin); }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Medecin> updateMedecin(@PathVariable Long id, @RequestBody Medecin medecin) {
+        return medecinService.updateMedecin(id, medecin)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping("/{id}")
     public void deleteMedecin(@PathVariable Long id) { medecinService.deleteMedecin(id); }
 }
